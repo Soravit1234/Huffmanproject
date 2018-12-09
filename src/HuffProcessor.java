@@ -71,7 +71,7 @@ public class HuffProcessor {
 	//------------------------helper methods--------------------------------------//
 	
 	private int[] readForCounts(BitInputStream in, BitOutputStream out) {
-		// WRITE HELPER METHOD TO DETERMINE FREQS PG 10
+		// helper method to find frequency
 		int[] store257 = new int[ALPH_SIZE + 1];
 		store257[PSEUDO_EOF] = 1;
 		while (true){
@@ -84,7 +84,7 @@ public class HuffProcessor {
 	}
 
 	private HuffNode makeTreeFromCounts(int[] counts) {
-		// WRITE HELPER METHOD TO MAKE CODINGS FROM TRIE/TREE
+		// helper method to make coding from tree
 		PriorityQueue<HuffNode> pq = new PriorityQueue<HuffNode>();
 
 		for (int a=0; a<counts.length; a++) {
@@ -103,7 +103,7 @@ public class HuffProcessor {
 	}
 
 	private String[] makeCodingsFromTree(HuffNode root) {
-		// WRITE HELPER METHOD TO MAKE CODINGS FROM TRIE/TREE
+		// helper method to make coding from tree
 		String[] encodings = new String[ALPH_SIZE + 1];
 		codingHelper(root, "", encodings);	// ANOTHER HELPER METHOD
 		return encodings;	
@@ -153,18 +153,9 @@ public class HuffProcessor {
 		}
 	}
 
-	/**
-	 * Reads the bits from the compressed file and uses them to traverse
-	 * root-to-leaf paths, writing leaf values to the output file. Stops when
-	 * PSEUDO_EOF is found
-	 * 
-	 * @param root
-	 *            The head of the tree used to decompress.
-	 * @param in
-	 *            Buffered bit stream of the file to be decompressed.
-	 * @param out
-	 *            Buffered bit stream writing to the output file.
-	 */
+	/*Reads the bits from the compressed file and uses them to traverse
+	 root-to-leaf paths, writing leaf values to the output file. Stops when
+	 PSEUDO_EOF is found*/
 	private void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out) {
 		HuffNode current = root;
 		while (true) {
